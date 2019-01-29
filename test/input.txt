@@ -21,7 +21,7 @@
   add wrong args wrong args
   add Valid Name p/12345 valid@email.butNoPrefix
   add Valid Name 12345 e/valid@email.butPhonePrefixMissing
-  
+
   # should catch invalid person data
   add []\[;] p/12345 e/valid@e.mail
   add Valid Name p/not_numbers e/valid@e.mail
@@ -59,6 +59,32 @@
   # find multiple with same keyword
   find Dickson
   # find multiple with some keywords
+  find Charlie Betsy
+
+##########################################################
+# test modify person command
+##########################################################
+
+# last active view: [1] betsy [2] charlie
+
+  # should catch invalid args format
+  modify
+  modify with one arg wrong
+  modify 1 with one arg wrong
+
+  # should catch invalid index
+  modify 3 New p/12345678 e/email@email.com
+
+  # should modify correctly and show new modify list
+  modify 2 Charlie Cee p/1214325 e/email@email.com
+
+  # should catch invalid index
+  modify 2 Charlie 130 p/11111111 e/1@3.0
+
+  # modifies correctly
+  modify 1 Charlie 130 p/11111111 e/1@3.0
+
+  # find keywords to test delete
   find Charlie Betsy
 
 ##########################################################

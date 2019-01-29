@@ -528,7 +528,6 @@ public class AddressBook {
       }
       final String[] newPerson = decodeResult.get();
 
-
       modifyPersonInAddressBook(targetInModel,newPerson);
 
       return getMessageForSuccessfulModification(targetInModel,newPerson);
@@ -540,9 +539,7 @@ public class AddressBook {
         final String newInfo = rawArgs.substring(2,rawArgs.length());
         final int extractedIndex = Integer.parseInt(indexValue.trim()); // use standard libraries to parse
         return extractedIndex >= DISPLAYED_INDEX_OFFSET;
-      } catch (NumberFormatException nfe) {
-        return false;
-      } catch (StringIndexOutOfBoundsException oob) {
+      } catch (NumberFormatException | StringIndexOutOfBoundsException nfe) {
         return false;
       }
     }
@@ -853,9 +850,12 @@ public class AddressBook {
     }
 
     private static void modifyPersonInAddressBook(String[] exactPerson, String[] newPerson) {
-      final int exactindex = ALL_PERSONS.indexOf(exactPerson);
+      final int exactindex = ALL_PERSONS.indexOf(exactPerson);;
       ALL_PERSONS.set(exactindex,newPerson);
       savePersonsToFile(getAllPersonsInAddressBook(), storageFilePath);
+      final ArrayList<String[]> modified = new ArrayList<>();
+      modified.add(ALL_PERSONS.get(exactindex));
+      showToUser(modified);
     }
 
     /**
