@@ -479,7 +479,7 @@ public class AddressBook {
      *
      * @param personsDisplayed used to generate summary
      * @return summary message for persons displayed
-     */git
+     */
     private static String getMessageForPersonsDisplayedSummary(ArrayList<String[]> personsDisplayed) {
         return String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, personsDisplayed.size());
     }
